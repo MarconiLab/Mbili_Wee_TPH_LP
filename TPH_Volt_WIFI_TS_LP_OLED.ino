@@ -15,12 +15,19 @@
 //Wee library
 #include "ESP8266.h"
 
-//The sleep time in seconds (MAX 86399)
-//Each time clock is refreshed
+//The sleep time in seconds (MAX 86399). Each time clock is refreshed
 #define SLEEP_PERIOD 60
 
 //The quantity of lectures before sending (Total time to send=PERIOD_SEND times SLEEP_PERIOD)
 #define PERIOD_SEND 30
+
+//WiFi settings
+#define SSID "MarconiLab"
+#define PASSWORD   "marconi-lab"
+
+//Add your apikey (THINGSPEAK_KEY) from your channel
+// GET /update?key=[THINGSPEAK_KEY]&field1=[data 1]&field2=[data 2]...;
+String GET = "GET /update?key=R0QKO5WAYRUP0V8Y";
 
 //Define power pin to switch onoff bee
 #define GROVE_PWR 22
@@ -31,15 +38,9 @@
 //Data header
 #define DATA_HEADER "TimeDate, TempSHT21, TempBMP, PressureBMP, HumiditySHT21, BatVoltage"
 
-#define SSID "MarconiLab"
-#define PASSWORD   "marconi-lab"
+//TS address
 #define HOST_NAME   "api.thingspeak.com"
 #define HOST_PORT   (80)
-
-//Add your apikey (THINGSPEAK_KEY) from your channel
-// GET /update?key=[THINGSPEAK_KEY]&field1=[data 1]&field2=[data 2]...;
-String GET = "GET /update?key=R0QKO5WAYRUP0V8Y";
-
 
 //Seperators
 #define FIRST_SEP "?"
