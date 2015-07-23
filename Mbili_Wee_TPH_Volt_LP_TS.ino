@@ -1,7 +1,6 @@
 //Measure every 15 seconds and sends to ThingSpeak every 30 minutes
 //wireless.ictp.it/rwanda_2015 RJC
 #include <Wire.h>
-//#include <SeeedOLED.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 
@@ -97,9 +96,6 @@ void setup()
   //Setup sleep mode
   setupSleep();
 
-  //Setup Oled Display
-  //setupOled();
-  
   //Echo the data header to the serial connection
   Serial.println(DATA_HEADER);
  
@@ -176,15 +172,6 @@ void wakeISR()
 {
   //Leave this blank
 }
-
-void setupOled()
-{
-  SeeedOled.clearDisplay();          //clear the screen and set start position to top left corner
-  SeeedOled.setNormalDisplay();      //Set display to normal mode (i.e non-inverse mode)
-  SeeedOled.setPageMode();           //Set addressing mode to Page Mode
-  //SeeedOled.setTextXY(0,5);          //Set the cursor to Xth Page, Yth Column  
-  //SeeedOled.putString("IoTea"); //Print the String
- }
 
 void systemSleep()
 {
@@ -313,57 +300,6 @@ void updateTS( String T1, String T2 , String P, String H, String V)
         Serial.print("release tcp err\r\n");
     }
 }
-
- void oleddata()
- {
-  DateTime now = rtc.now(); //get the current date-time    
-  SeeedOled.init();                  //initialize SEEED OLED display
-  SeeedOled.clearDisplay();          //clear the screen and set start position to top left corner
-  SeeedOled.setTextXY(0,0);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putNumber(now.year());
-  SeeedOled.putString("-");
-  SeeedOled.putNumber(now.month());
-  SeeedOled.putString("-");
-  SeeedOled.putNumber(now.date()); 
-  SeeedOled.putString("  ");
-  SeeedOled.putString(weekDay[now.dayOfWeek()]);  
-  SeeedOled.setTextXY(1,7);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putNumber(now.hour());
-  SeeedOled.putString(":");
-  SeeedOled.putNumber(now.minute());
-  SeeedOled.putString(":");
-  SeeedOled.putFloat(now.second(),0); 
-
-    
-  SeeedOled.setTextXY(3,0);          //Set the cursor to Xth Page, Yth Column  
-  SeeedOled.putString("TEMP = "); //Print the String
-  String date1 = String (bmp.readTemperature()) ;
-  SeeedOled.putString(date1.c_str()); //Print the String
-  SeeedOled.setTextXY(3,13);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putString("C"); //Print the String
-  
-  SeeedOled.setTextXY(5,0);          //Set the cursor to Xth Page, Yth Column  
-  SeeedOled.putString("HUMI = "); //Print the String
-  String date2 = String (SHT2x.GetHumidity()) ;
-  SeeedOled.putString(date2.c_str()); //Print the String
-  SeeedOled.setTextXY(5,13);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putString("%"); //Print the String
-  
-  SeeedOled.setTextXY(6,0);          //Set the cursor to Xth Page, Yth Column  
-  SeeedOled.putString("PRES = "); //Print the String
-  String date3 = String ((bmp.readPressure() / 100)) ;
-  SeeedOled.putString(date3.c_str()); //Print the String
-  SeeedOled.setTextXY(6,12);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putString(" hPa"); //Print the String*/
-  
-  SeeedOled.setTextXY(7,0);          //Set the cursor to Xth Page, Yth Column  
-  SeeedOled.putString("BATT = "); //Print the String
-  int mv = getRealBatteryVoltage() * 1000.0;
-  String Smv=String(mv);
-  SeeedOled.putString(Smv.c_str()); //Print the String
-  SeeedOled.setTextXY(7,12);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putString(" mA"); //Print the String*/
- }
 
 String createDataRecord()
 {
