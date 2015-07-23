@@ -1,7 +1,7 @@
 //Measure every 15 seconds and sends to ThingSpeak every 30 minutes
 //wireless.ictp.it/rwanda_2015 RJC
 #include <Wire.h>
-#include <SeeedOLED.h>
+//#include <SeeedOLED.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 
