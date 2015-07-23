@@ -362,7 +362,7 @@ void updateTS( String T1, String T2 , String P, String H, String V)
   String Smv=String(mv);
   SeeedOled.putString(Smv.c_str()); //Print the String
   SeeedOled.setTextXY(7,12);          //Set the cursor to Xth Page, Yth Column
-  SeeedOled.putString(" mA"); //Print the String*/
+  SeeedOled.putString(" mV"); //Print the String*/
  }
 
 String createDataRecord()
